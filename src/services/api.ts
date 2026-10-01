@@ -110,9 +110,51 @@ const MOCK_PRODUCTS: Product[] = [
     createdAt: Date.now() - 86400000 * 15,
     updatedAt: Date.now() - 14400000,
   },
+  {
+    id: 'prod_pantalon',
+    name: 'Pantalón',
+    category: 'Pantalones',
+    sizeOrder: ['4', '6', '8', '10', '12', '14', '16', '38', '40', '42', '44'],
+    stock: {
+      '4': { quantity: 8, minStock: 2 },
+      '6': { quantity: 10, minStock: 2 },
+      '8': { quantity: 14, minStock: 2 },
+      '10': { quantity: 15, minStock: 2 },
+      '12': { quantity: 12, minStock: 2 },
+      '14': { quantity: 10, minStock: 2 },
+      '16': { quantity: 8, minStock: 2 },
+      '38': { quantity: 6, minStock: 2 },
+      '40': { quantity: 6, minStock: 2 },
+      '42': { quantity: 4, minStock: 2 },
+      '44': { quantity: 3, minStock: 2 },
+    },
+    createdAt: Date.now() - 86400000 * 6,
+    updatedAt: Date.now() - 7200000,
+  },
+  {
+    id: 'prod_campera',
+    name: 'Campera',
+    category: 'Camperas',
+    sizeOrder: ['4', '6', '8', '10', '12', '14', '16', '38', '40', '42', '44'],
+    stock: {
+      '4': { quantity: 6, minStock: 2 },
+      '6': { quantity: 8, minStock: 2 },
+      '8': { quantity: 12, minStock: 2 },
+      '10': { quantity: 14, minStock: 2 },
+      '12': { quantity: 12, minStock: 2 },
+      '14': { quantity: 8, minStock: 2 },
+      '16': { quantity: 6, minStock: 2 },
+      '38': { quantity: 5, minStock: 2 },
+      '40': { quantity: 5, minStock: 2 },
+      '42': { quantity: 4, minStock: 2 },
+      '44': { quantity: 2, minStock: 2 },
+    },
+    createdAt: Date.now() - 86400000 * 4,
+    updatedAt: Date.now() - 3600000,
+  },
 ];
 
-const LOCAL_STORAGE_KEY_PRODS = 'stock_ropa_products_v2';
+const LOCAL_STORAGE_KEY_PRODS = 'stock_ropa_products_v3';
 const LOCAL_STORAGE_KEY_MOVS = 'stock_ropa_movements_v2';
 
 function getLocalProducts(): Product[] {

@@ -31,6 +31,10 @@ const SIZE_PRESETS = [
     name: 'Short / Deportivo (4 a 3 AD)',
     sizes: ['4', '6', '8', '10', '12', '14', '16', '1 AD', '2 AD', '3 AD'],
   },
+  {
+    name: 'Pantalón / Campera (4 al 44)',
+    sizes: ['4', '6', '8', '10', '12', '14', '16', '38', '40', '42', '44'],
+  },
 ];
 
 export const ProductModal: React.FC<ProductModalProps> = ({
