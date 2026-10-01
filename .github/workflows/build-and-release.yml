@@ -1,0 +1,34 @@
+name: Build & Release Desktop App
+
+on:
+  push:
+    tags:
+      - 'v*' # Se activa al crear y pushear un tag de versión (ej: v1.0.0, v1.0.1)
+
+permissions:
+  contents: write
+
+jobs:
+  build-and-release:
+    runs-on: windows-latest
+
+    steps:
+      - name: Checkout Código
+        uses: actions/checkout@v4
+
+      - name: Configurar Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: 'npm'
+
+      - name: Instalar Dependencias
+        run: npm ci
+
+      - name: Compilar Frontend y Electron
+        run: npm run build
+
+      - name: Construir Instalador de Windows y Publicar en GitHub Release
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: npx electron-builder --win --publish always

@@ -1,0 +1,66 @@
+{
+  "name": "stock-indumentaria-escolar",
+  "productName": "Stock Indumentaria Escolar",
+  "version": "1.0.0",
+  "description": "Sistema de control de inventario y stock de indumentaria escolar offline",
+  "main": "dist-electron/main.cjs",
+  "type": "module",
+  "scripts": {
+    "dev:renderer": "vite",
+    "dev:electron": "cross-env NODE_ENV=development wait-on tcp:5173 && electron .",
+    "dev": "concurrently -k \"vite\" \"tsup --watch\" \"npm run dev:electron\"",
+    "build:renderer": "tsc -b && vite build",
+    "build:electron": "tsup",
+    "build": "npm run build:renderer && npm run build:electron",
+    "dist": "npm run build && electron-builder",
+    "dist:dir": "npm run build && electron-builder --dir"
+  },
+  "dependencies": {
+    "clsx": "^2.1.1",
+    "electron-updater": "^6.8.9",
+    "lucide-react": "^1.49.0",
+    "react": "^19.2.8",
+    "react-dom": "^19.2.8",
+    "tailwind-merge": "^3.7.0"
+  },
+  "devDependencies": {
+    "@tailwindcss/vite": "^4.3.3",
+    "@types/node": "^24.13.3",
+    "@types/react": "^19.2.18",
+    "@types/react-dom": "^19.2.7",
+    "@vitejs/plugin-react": "^6.1.1",
+    "concurrently": "^10.0.5",
+    "cross-env": "^10.1.0",
+    "electron": "^44.5.1",
+    "electron-builder": "^26.15.3",
+    "tailwindcss": "^4.3.3",
+    "tsup": "^8.5.1",
+    "tsx": "^4.23.15",
+    "typescript": "~6.0.2",
+    "vite": "^8.3.0",
+    "wait-on": "^9.5.1"
+  },
+  "author": "Stock Escolar",
+  "build": {
+    "appId": "com.stockropa.bili",
+    "productName": "Stock Indumentaria Escolar",
+    "directories": {
+      "output": "release"
+    },
+    "files": [
+      "dist/**/*",
+      "dist-electron/**/*"
+    ],
+    "win": {
+      "target": [
+        "nsis",
+        "portable"
+      ]
+    },
+    "publish": {
+      "provider": "github",
+      "owner": "italiabilingue-source",
+      "repo": "stockropabili"
+    }
+  }
+}
