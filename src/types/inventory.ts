@@ -44,6 +44,13 @@ export interface UpdateInfo {
   releaseNotes?: string;
 }
 
+export interface PriceRule {
+  id: string;
+  garment: string;
+  sizeRange: string;
+  price: number;
+}
+
 export interface AppApi {
   getProducts: () => Promise<Product[]>;
   saveProduct: (product: Omit<Product, 'createdAt' | 'updatedAt'>) => Promise<Product>;

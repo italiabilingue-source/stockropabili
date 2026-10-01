@@ -5,12 +5,15 @@ import {
   History, 
   RefreshCw, 
   HardDrive,
-  Download
+  Download,
+  Tag
 } from 'lucide-react';
 
 interface HeaderProps {
   version: string;
   updateStatus: { type: string; info?: any } | null;
+  showPriceList: boolean;
+  onTogglePriceList: () => void;
   onOpenQuickSale: () => void;
   onOpenNewProduct: () => void;
   onOpenHistory: () => void;
@@ -21,6 +24,8 @@ interface HeaderProps {
 export const Header = ({
   version,
   updateStatus,
+  showPriceList,
+  onTogglePriceList,
   onOpenQuickSale,
   onOpenNewProduct,
   onOpenHistory,
@@ -90,6 +95,19 @@ export const Header = ({
           >
             <History className="w-4 h-4 text-slate-500" />
             Historial
+          </button>
+
+          <button
+            onClick={onTogglePriceList}
+            className={`inline-flex items-center gap-1.5 px-3 py-2 text-xs font-semibold rounded-lg transition-all ${
+              showPriceList
+                ? 'bg-emerald-100 text-emerald-800 border border-emerald-300'
+                : 'bg-slate-100 hover:bg-slate-200 text-slate-700'
+            }`}
+            title="Ver / Ocultar Lista de Precios"
+          >
+            <Tag className="w-4 h-4 text-emerald-600" />
+            Precios
           </button>
 
           <button

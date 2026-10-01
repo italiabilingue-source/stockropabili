@@ -7,6 +7,7 @@ import { QuickSaleModal } from './components/QuickSaleModal';
 import { ProductModal } from './components/ProductModal';
 import { MovementsModal } from './components/MovementsModal';
 import { UpdateBanner } from './components/UpdateBanner';
+import { PriceListSidebar } from './components/PriceListSidebar';
 import { 
   Package, 
   Layers, 
@@ -22,6 +23,7 @@ export default function App() {
   const [isLoading, setIsLoading] = useState(true);
   const [version, setVersion] = useState('1.0.0');
   const [updateStatus, setUpdateStatus] = useState<{ type: string; info?: any } | null>(null);
+  const [showPriceList, setShowPriceList] = useState(true);
 
   // Modals state
   const [isQuickSaleOpen, setIsQuickSaleOpen] = useState(false);
@@ -65,6 +67,9 @@ export default function App() {
         e.preventDefault();
         setEditingProduct(null);
         setIsProductModalOpen(true);
+      } else if (e.key === 'F4') {
+        e.preventDefault();
+        setShowPriceList((prev) => !prev);
       }
     };
 
@@ -202,6 +207,8 @@ export default function App() {
       <Header
         version={version}
         updateStatus={updateStatus}
+        showPriceList={showPriceList}
+        onTogglePriceList={() => setShowPriceList((prev) => !prev)}
         onOpenQuickSale={() => setIsQuickSaleOpen(true)}
         onOpenNewProduct={() => {
           setEditingProduct(null);
@@ -273,34 +280,45 @@ export default function App() {
           </div>
         </div>
 
-        {/* Grilla Principal */}
+        {/* Grilla Principal + Lista de Precios Lateral */}
         {isLoading ? (
           <div className="py-24 text-center">
             <Loader2 className="w-10 h-10 animate-spin text-blue-600 mx-auto mb-3" />
             <p className="text-sm font-semibold text-slate-600">
-              Cargando base de datos local SQLite...
+              Cargando base de datos local...
             </p>
           </div>
         ) : (
-          <InventoryGrid
-            products={products}
-            onSaveRow={handleSaveRow}
-            onQuickDecrement={handleQuickDecrement}
-            onEditProduct={(p) => {
-              setEditingProduct(p);
-              setIsProductModalOpen(true);
-            }}
-            onDeleteProduct={handleDeleteProduct}
-          />
+          <div className="flex flex-col xl:flex-row gap-6 items-start">
+            <div className="flex-1 w-full min-w-0">
+              <InventoryGrid
+                products={products}
+                onSaveRow={handleSaveRow}
+                onQuickDecrement={handleQuickDecrement}
+                onEditProduct={(p) => {
+                  setEditingProduct(p);
+                  setIsProductModalOpen(true);
+                }}
+                onDeleteProduct={handleDeleteProduct}
+              />
+            </div>
+
+            <PriceListSidebar
+              isOpen={showPriceList}
+              onClose={() => setShowPriceList(false)}
+            />
+          </div>
         )}
       </main>
 
       {/* Footer Minimalista */}
       <footer className="border-t border-slate-200 bg-white py-3 px-6 text-center text-xs text-slate-400 flex flex-col sm:flex-row items-center justify-between max-w-7xl mx-auto w-full gap-2">
-        <div className="flex items-center gap-3">
-          <span>Presiona <kbd className="px-1.5 py-0.5 bg-slate-100 border border-slate-300 rounded font-mono text-[10px] text-slate-700">F2</kbd> para Venta Rápida</span>
+        <div className="flex flex-wrap items-center gap-3">
+          <span>Presiona <kbd className="px-1.5 py-0.5 bg-slate-100 border border-slate-300 rounded font-mono text-[10px] text-slate-700">F2</kbd> Venta Rápida</span>
           <span>•</span>
-          <span>Presiona <kbd className="px-1.5 py-0.5 bg-slate-100 border border-slate-300 rounded font-mono text-[10px] text-slate-700">F3</kbd> para Nueva Prenda</span>
+          <span>Presiona <kbd className="px-1.5 py-0.5 bg-slate-100 border border-slate-300 rounded font-mono text-[10px] text-slate-700">F3</kbd> Nueva Prenda</span>
+          <span>•</span>
+          <span>Presiona <kbd className="px-1.5 py-0.5 bg-slate-100 border border-slate-300 rounded font-mono text-[10px] text-slate-700">F4</kbd> Lista de Precios</span>
         </div>
         <div className="flex items-center gap-2">
           <button
