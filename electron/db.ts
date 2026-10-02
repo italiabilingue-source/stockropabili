@@ -269,7 +269,7 @@ export function seedInitialSchoolGarments() {
       id: 'prod_pollera_microfibra',
       name: 'Pollera Microfibra (MF)',
       category: 'Polleras',
-      sizeOrder: ['4', '6', '8', '10', '12', '14', '16', '36', '38', '40'],
+      sizeOrder: ['4', '6', '8', '10', '12', '14', '16', '36', '38', '40', '42'],
       stock: {
         '4': { quantity: 5, minStock: 2 },
         '6': { quantity: 8, minStock: 2 },
@@ -281,6 +281,7 @@ export function seedInitialSchoolGarments() {
         '36': { quantity: 5, minStock: 2 },
         '38': { quantity: 4, minStock: 2 },
         '40': { quantity: 3, minStock: 2 },
+        '42': { quantity: 3, minStock: 2 },
       },
       createdAt: now,
       updatedAt: now,

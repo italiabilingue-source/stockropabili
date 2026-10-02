@@ -74,7 +74,7 @@ const MOCK_PRODUCTS: Product[] = [
     id: 'prod_pollera_microfibra',
     name: 'Pollera Microfibra (MF)',
     category: 'Polleras',
-    sizeOrder: ['4', '6', '8', '10', '12', '14', '16', '36', '38', '40'],
+    sizeOrder: ['4', '6', '8', '10', '12', '14', '16', '36', '38', '40', '42'],
     stock: {
       '4': { quantity: 5, minStock: 2 },
       '6': { quantity: 8, minStock: 2 },
@@ -86,6 +86,7 @@ const MOCK_PRODUCTS: Product[] = [
       '36': { quantity: 5, minStock: 2 },
       '38': { quantity: 4, minStock: 2 },
       '40': { quantity: 3, minStock: 2 },
+      '42': { quantity: 3, minStock: 2 },
     },
     createdAt: Date.now() - 86400000 * 12,
     updatedAt: Date.now() - 86400000,
@@ -154,7 +155,7 @@ const MOCK_PRODUCTS: Product[] = [
   },
 ];
 
-const LOCAL_STORAGE_KEY_PRODS = 'stock_ropa_products_v3';
+const LOCAL_STORAGE_KEY_PRODS = 'stock_ropa_products_v4';
 const LOCAL_STORAGE_KEY_MOVS = 'stock_ropa_movements_v2';
 
 function getLocalProducts(): Product[] {

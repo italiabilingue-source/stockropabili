@@ -216,8 +216,13 @@ export const InventoryGrid: React.FC<InventoryGridProps> = ({
                             )}
                           </div>
                           <div>
-                            <div className="font-semibold text-slate-900 group-hover:text-blue-600 transition-colors">
-                              {product.name}
+                            <div 
+                              onClick={() => onEditProduct(product)}
+                              className="font-semibold text-slate-900 hover:text-blue-600 transition-colors cursor-pointer flex items-center gap-1.5"
+                              title="Click para editar nombre, categoría o talles de la prenda"
+                            >
+                              <span>{product.name}</span>
+                              <Edit3 className="w-3 h-3 text-slate-400 group-hover:text-blue-500 opacity-60 group-hover:opacity-100 transition-opacity" />
                             </div>
                             <span className="inline-block px-2 py-0.5 mt-1 text-[11px] font-semibold bg-slate-100 text-slate-600 rounded-md">
                               {product.category}
@@ -336,10 +341,11 @@ export const InventoryGrid: React.FC<InventoryGridProps> = ({
 
                             <button
                               onClick={() => onEditProduct(product)}
-                              className="p-1 text-slate-400 hover:text-blue-600 hover:bg-blue-50 rounded transition-colors"
-                              title="Editar datos de la prenda"
+                              className="inline-flex items-center gap-1 px-2 py-0.5 text-xs font-semibold text-slate-600 hover:text-blue-700 bg-slate-100 hover:bg-blue-50 rounded-md border border-slate-200 hover:border-blue-200 transition-colors"
+                              title="Editar nombre, categoría o talles de la prenda"
                             >
-                              <Edit3 className="w-3.5 h-3.5" />
+                              <Edit3 className="w-3 h-3 text-blue-600" />
+                              <span>Editar</span>
                             </button>
 
                             <button
