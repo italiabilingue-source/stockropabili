@@ -1,5 +1,5 @@
 import { useState, useEffect, useCallback } from 'react';
-import type { Product, Movement } from './types/inventory';
+import type { Product, Movement, PaymentMethod } from './types/inventory';
 import { api } from './services/api';
 import { Header } from './components/Header';
 import { InventoryGrid } from './components/InventoryGrid';
@@ -125,9 +125,10 @@ export default function App() {
     productId: string,
     size: string,
     quantity: number,
-    reason: string
+    paymentMethod: PaymentMethod,
+    notes: string
   ) => {
-    const res = await api.recordQuickSale(productId, size, quantity, reason);
+    const res = await api.recordQuickSale(productId, size, quantity, paymentMethod, notes);
     if (res.success) {
       setProducts((prev) =>
         prev.map((p) => {

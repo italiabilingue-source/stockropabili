@@ -18,6 +18,12 @@ export interface Product {
 
 export type MovementType = 'IN' | 'OUT' | 'ADJUST';
 
+export type PaymentMethod = 
+  | 'Efectivo' 
+  | 'Mercado Pago' 
+  | 'Tarjeta de Crédito' 
+  | 'Tarjeta de Débito';
+
 export interface Movement {
   id?: string;
   productId: string;
@@ -28,6 +34,8 @@ export interface Movement {
   previousStock: number;
   newStock: number;
   reason: string;
+  paymentMethod?: PaymentMethod | string;
+  notes?: string;
   timestamp: number;
   userId?: string;
 }
@@ -64,7 +72,8 @@ export interface AppApi {
     productId: string, 
     size: string, 
     quantity?: number, 
-    reason?: string
+    paymentMethod?: string,
+    notes?: string
   ) => Promise<{ success: boolean; newStock: number }>;
   getMovements: (limit?: number) => Promise<Movement[]>;
   selectAndSaveImage: () => Promise<string | null>;

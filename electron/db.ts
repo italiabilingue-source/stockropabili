@@ -154,7 +154,8 @@ export function recordQuickSale(
   productId: string,
   size: string,
   quantitySold: number = 1,
-  reason: string = 'Venta rápida de mostrador'
+  paymentMethod: string = 'Efectivo',
+  notes: string = ''
 ): { success: boolean; newStock: number } {
   const prod = dbMemory.products.find((p) => p.id === productId);
   if (!prod) throw new Error('Producto no encontrado');
@@ -173,6 +174,10 @@ export function recordQuickSale(
   item.quantity = newStock;
   prod.updatedAt = now;
 
+  const formattedReason = notes?.trim()
+    ? `Venta (${paymentMethod}) - ${notes.trim()}`
+    : `Venta (${paymentMethod})`;
+
   dbMemory.movements.unshift({
     id: String(Date.now() + Math.random()),
     productId: prod.id,
@@ -182,7 +187,9 @@ export function recordQuickSale(
     quantity: quantitySold,
     previousStock: prevQty,
     newStock,
-    reason,
+    reason: formattedReason,
+    paymentMethod,
+    notes: notes?.trim() || undefined,
     timestamp: now,
   });
 

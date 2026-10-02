@@ -125,8 +125,8 @@ app.whenReady().then(() => {
   ipcMain.handle('batch-update-stock', async (_, { productId, updates, reason }) => {
     return batchUpdateStock(productId, updates, reason);
   });
-  ipcMain.handle('record-quick-sale', async (_, { productId, size, quantity, reason }) => {
-    return recordQuickSale(productId, size, quantity, reason);
+  ipcMain.handle('record-quick-sale', async (_, { productId, size, quantity, paymentMethod, notes }) => {
+    return recordQuickSale(productId, size, quantity, paymentMethod, notes);
   });
   ipcMain.handle('get-movements', async (_, limit) => getMovements(limit));
   ipcMain.handle('get-app-version', async () => app.getVersion());

@@ -36,7 +36,9 @@ export const MovementsModal: React.FC<MovementsModalProps> = ({
       'Cantidad',
       'Stock Anterior',
       'Stock Resultante',
-      'Motivo',
+      'Forma de Pago',
+      'Observaciones',
+      'Motivo / Operacion',
     ];
 
     const rows = movements.map((m) => [
@@ -47,6 +49,8 @@ export const MovementsModal: React.FC<MovementsModalProps> = ({
       m.quantity,
       m.previousStock,
       m.newStock,
+      `"${(m.paymentMethod || '-').replace(/"/g, '""')}"`,
+      `"${(m.notes || '-').replace(/"/g, '""')}"`,
       `"${(m.reason || '').replace(/"/g, '""')}"`,
     ]);
 
@@ -152,7 +156,8 @@ export const MovementsModal: React.FC<MovementsModalProps> = ({
                   <th className="py-2.5 px-4 text-center">Tipo</th>
                   <th className="py-2.5 px-4 text-center">Cantidad</th>
                   <th className="py-2.5 px-4 text-center">Stock Resultante</th>
-                  <th className="py-2.5 px-4">Motivo / Operación</th>
+                  <th className="py-2.5 px-4">Forma de Pago</th>
+                  <th className="py-2.5 px-4">Observaciones / Motivo</th>
                 </tr>
               </thead>
               <tbody className="divide-y divide-slate-100">
@@ -195,8 +200,40 @@ export const MovementsModal: React.FC<MovementsModalProps> = ({
                       <span className="text-slate-400">{m.previousStock}</span> →{' '}
                       <span className="font-bold text-slate-800">{m.newStock}</span>
                     </td>
-                    <td className="py-2.5 px-4 text-slate-600 truncate max-w-xs">
-                      {m.reason || 'Sin motivo'}
+                    <td className="py-2.5 px-4 whitespace-nowrap">
+                      {m.paymentMethod === 'Efectivo' && (
+                        <span className="inline-block px-2 py-0.5 font-bold text-[10px] bg-emerald-100 text-emerald-800 rounded-md">
+                          💵 Efectivo
+                        </span>
+                      )}
+                      {m.paymentMethod === 'Mercado Pago' && (
+                        <span className="inline-block px-2 py-0.5 font-bold text-[10px] bg-sky-100 text-sky-800 rounded-md">
+                          📱 Mercado Pago
+                        </span>
+                      )}
+                      {m.paymentMethod === 'Tarjeta de Débito' && (
+                        <span className="inline-block px-2 py-0.5 font-bold text-[10px] bg-blue-100 text-blue-800 rounded-md">
+                          💳 Débito
+                        </span>
+                      )}
+                      {m.paymentMethod === 'Tarjeta de Crédito' && (
+                        <span className="inline-block px-2 py-0.5 font-bold text-[10px] bg-purple-100 text-purple-800 rounded-md">
+                          💳 Crédito
+                        </span>
+                      )}
+                      {!m.paymentMethod && (
+                        <span className="text-slate-400 text-[11px]">-</span>
+                      )}
+                    </td>
+                    <td className="py-2.5 px-4 text-slate-600 max-w-xs">
+                      {m.notes ? (
+                        <div>
+                          <span className="font-medium text-slate-900">{m.notes}</span>
+                          <span className="block text-[10px] text-slate-400 truncate">{m.reason}</span>
+                        </div>
+                      ) : (
+                        <span className="truncate block">{m.reason || 'Sin motivo'}</span>
+                      )}
                     </td>
                   </tr>
                 ))}

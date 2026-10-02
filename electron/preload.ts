@@ -7,8 +7,8 @@ const api: AppApi = {
   deleteProduct: (id) => ipcRenderer.invoke('delete-product', id),
   batchUpdateStock: (productId, updates, reason) =>
     ipcRenderer.invoke('batch-update-stock', { productId, updates, reason }),
-  recordQuickSale: (productId, size, quantity, reason) =>
-    ipcRenderer.invoke('record-quick-sale', { productId, size, quantity, reason }),
+  recordQuickSale: (productId, size, quantity, paymentMethod, notes) =>
+    ipcRenderer.invoke('record-quick-sale', { productId, size, quantity, paymentMethod, notes }),
   getMovements: (limit) => ipcRenderer.invoke('get-movements', limit),
   selectAndSaveImage: () => ipcRenderer.invoke('select-and-save-image'),
   resetDatabaseWithSamples: () => ipcRenderer.invoke('reset-database-samples'),

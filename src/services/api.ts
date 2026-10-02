@@ -263,9 +263,15 @@ export const api: AppApi = {
     return { success: true, updatedStock: prod.stock };
   },
 
-  recordQuickSale: async (productId, size, quantity = 1, reason = 'Venta rápida de mostrador') => {
+  recordQuickSale: async (
+    productId, 
+    size, 
+    quantity = 1, 
+    paymentMethod = 'Efectivo', 
+    notes = ''
+  ) => {
     if (window.electronApi) {
-      return window.electronApi.recordQuickSale(productId, size, quantity, reason);
+      return window.electronApi.recordQuickSale(productId, size, quantity, paymentMethod, notes);
     }
     const products = getLocalProducts();
     const prod = products.find((p) => p.id === productId);
@@ -281,6 +287,10 @@ export const api: AppApi = {
     item.quantity = newStock;
     prod.updatedAt = Date.now();
 
+    const formattedReason = notes?.trim()
+      ? `Venta (${paymentMethod}) - ${notes.trim()}`
+      : `Venta (${paymentMethod})`;
+
     addLocalMovement({
       id: String(Date.now() + Math.random()),
       productId,
@@ -290,7 +300,9 @@ export const api: AppApi = {
       quantity,
       previousStock: prevQty,
       newStock,
-      reason,
+      reason: formattedReason,
+      paymentMethod,
+      notes: notes?.trim() || undefined,
       timestamp: Date.now(),
     });
 
