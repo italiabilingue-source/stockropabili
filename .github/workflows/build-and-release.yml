@@ -3,7 +3,8 @@ name: Build & Release Desktop App
 on:
   push:
     tags:
-      - 'v*' # Se activa al crear y pushear un tag de versión (ej: v1.0.0, v1.0.1)
+      - 'v*' # Se activa al crear y pushear un tag de versión (ej: v1.0.1)
+  workflow_dispatch: # Permite ejecutar la compilación y release manualmente desde GitHub
 
 permissions:
   contents: write
