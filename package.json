@@ -61,7 +61,8 @@
     "publish": {
       "provider": "github",
       "owner": "italiabilingue-source",
-      "repo": "stockropabili"
+      "repo": "stockropabili",
+      "releaseType": "release"
     }
   }
 }
