@@ -1,7 +1,7 @@
 {
   "name": "stock-indumentaria-escolar",
   "productName": "Stock Indumentaria Escolar",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "Sistema de control de inventario y stock de indumentaria escolar offline",
   "main": "dist-electron/main.cjs",
   "type": "module",
